@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find ten</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <div id="container1" class="container">
+        <div class="select-panels">
+            <h1> How many panels do you want to play with?</h1>
+            <div class="number-panels">
+                <button class="card" onclick="renderPanels(12)">12
+                </button>
+                <button class="card" onclick="renderPanels(16)">16
+                </button>
+            </div>
+            <br /><br />
+            <h1>Not sure how to create a game?</h1>
+            <h2>Play around with some of our pre-made games</h2>
+            <button id="play-game" class="button">I just want to play!</button>
+        </div>
+
+
+    </div>
+    <div id="container2" class="container hidden">
+        <div class='prompt'>
+            <input type="text" id="prompt"
+                placeholder="Write instructions for your students, e.g. 'Find all the European capitals'"></input>
+        </div>
+        <div class="panels">
+        </div>
+
+        <button id="submit-button" class="button">Start game</button>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>

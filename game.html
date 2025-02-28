@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Layout</title>
+    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="panels">
+        </div>
+        <div class="bottom-container">
+            <div id="information-container">
+                <p></p>
+            </div>
+            <div id="errors" class="stat-container">
+                Errors:<br>0
+            </div>
+        </div>
+    </div>
+    <div id="game-won" class="hide">
+        <div>
+            <h1>You found items in all categories!</h1>
+        </div>
+        <div id="game-won-feedback">
+        </div>
+        <!-- <div id="game-won-stats">
+            <h1 id='gameWonErrors' style="color: indianred;">Errors:&nbsp;&nbsp;</h1>
+        </div> -->
+    </div>
+    <!-- Script -->
+    <script type="module" src="game.js"></script>
+</body>
+
+</html>

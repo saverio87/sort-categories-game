@@ -1,0 +1,207 @@
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f4c531;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+button {
+    padding: 0.8em 1.5em;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #555555;
+    background-color: #e0b128;
+    border: none;
+    border-radius: 0.2em;
+    border: 2px solid black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555555;
+    color: white;
+}
+
+
+
+.container {
+    position: absolute;
+    width: 90vw;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    /* background-color: white; */
+    border-radius: 0.5em;
+    /* Default layout: side-by-side columns */
+    overflow: scroll;
+}
+
+/* Container 1 */
+
+
+.horizontal-panels {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 2rem;
+}
+
+.vertical-panels {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    gap: 2rem;
+}
+
+
+.card:hover {
+    background-color: #e0b128;
+    border: 2px solid #555555;
+
+}
+
+
+.card {
+    background-color: #f4c531;
+    border: 2px solid #333;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 0.2em;
+    width: 10rem;
+    height: 10rem;
+}
+
+
+.input-box {
+    background-color: white;
+    text-align: center;
+    border: 0px;
+    flex-grow: 1;
+    height: 100%;
+    font-size: 2rem;
+}
+
+.input-box::placeholder {
+    color: #333;
+}
+
+.input-box:focus {
+    outline: none;
+}
+
+
+/* Container 2 */
+
+
+.hidden {
+    display: none;
+}
+
+
+/* Responsive grid */
+
+.responsive-grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    /* Center the grid */
+    gap: 10px;
+    /* Space between grid items */
+    grid-template-columns: 1fr 1fr;
+    /* Always two columns */
+
+    .grid-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        gap: 0.2rem;
+        border-radius: 0.2rem;
+        /* Ensuring full height of the container */
+    }
+
+
+}
+
+/* Small row (heading) */
+.heading-row {
+    flex: 0 1 20%;
+    /* Takes up 15-20% of the height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0b128;
+    border-radius: 0.2rem;
+    border: 1px solid black;
+    padding: 0.2rem 0rem;
+
+    /* Transparent text input for category heading */
+    .category-input {
+        background-color: transparent;
+        border: none;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        /* Remove focus outline */
+        color: black;
+        /* Change to match your design */
+        font-size: 2vw;
+        text-align: center;
+    }
+}
+
+.panel {
+    padding: 0.2rem;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    height: 100%;
+    position: relative;
+    /* Positioning for textbox */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .item-input {
+        background-color: transparent;
+        border: none;
+        width: 90%;
+        height: 90%;
+        color: black;
+        /* Change to match your design */
+        font-size: 1.5vw;
+        text-align: center;
+        align-items: center;
+        white-space: initial;
+        /* Allow text wrapping */
+        outline: none;
+        /* Remove focus outline */
+        resize: none;
+        /* Prevent resizing */
+        overflow: auto;
+        /* Enable scrolling if needed */
+    }
+}
