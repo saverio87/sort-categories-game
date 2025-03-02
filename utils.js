@@ -141,15 +141,24 @@ export function showGameWonScreen(items, categoriesMap, container) {
 
 // index.html utils
 
-export const createContainer = (name) => {
+export const createContainer = () => {
     const container = document.createElement('div');
-    container.id = name;
     container.classList.add('container');
     return container
 }
 
-export const createHeading = (text) => {
+export const createLinks = (text, fn) => {
+    const link = document.createElement('div');
+    link.classList.add('links');
+    link.innerText = text;
+    link.addEventListener('click', fn)
+    return link
+}
+export const createHeading = (text, fontSize, fontFamily) => {
     const heading = document.createElement('h1');
+    if (fontSize) heading.style.fontSize = `${fontSize}vw`;
+    if (fontFamily) heading.style.fontFamily = fontFamily;
+    heading.style.onho
     heading.textContent = text;
     return heading
 }
@@ -305,7 +314,7 @@ export const colorMap = {
 }
 
 
-const sampleGameData1 = {
+export const sampleGameData1 = {
     categories: {
         0: 'Fruits',
         1: 'Animals',

@@ -14,6 +14,42 @@ body {
     width: 100vw;
 }
 
+#wallpaper {
+    height: 100%;
+    width: 100%;
+    background-image: url('assets/wide.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: contain;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.links {
+    padding: 1rem 2rem;
+    font-size: 3vw;
+    border: 3px solid transparent;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+
+
+.links:hover {
+    cursor: pointer;
+    background-color: #f4c531;
+    border-radius: 0.5rem;
+    border: 3px solid #333;
+}
+
+
 button {
     padding: 0.8em 1.5em;
     font-size: 1.2em;
@@ -33,18 +69,39 @@ button:hover {
 }
 
 
-
+/* central container */
 .container {
     position: absolute;
-    width: 90vw;
-    height: 95vh;
+    border: 2px solid black;
+    padding: 1rem 2rem;
+    background-color: #e0b128;
+    width: 60vw;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     gap: 0.5em;
     /* background-color: white; */
     border-radius: 0.5em;
+    /* Default layout: side-by-side columns */
+    overflow: scroll;
+}
+
+/* screen-wide container */
+
+#screen-wide {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    padding: 1rem 2rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     /* Default layout: side-by-side columns */
     overflow: scroll;
 }
@@ -60,13 +117,6 @@ button:hover {
     gap: 2rem;
 }
 
-.vertical-panels {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 80%;
-    gap: 2rem;
-}
 
 
 .card:hover {

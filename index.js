@@ -1,8 +1,13 @@
+// rendering
 import {
-    createContainer, createHeading, createResponsiveGrid,
-    createSubmitButton, storeCategories, storeItems,
-    validateData, createDataObject
+    createContainer, createHeading, createResponsiveGrid, createSubmitButton, createLinks
 } from "./utils.js";
+// logic
+import {
+    storeCategories, storeItems, validateData, createDataObject
+} from "./utils.js"
+
+import { sampleGameData1 } from "./utils.js";
 
 class GameState {
     constructor() {
@@ -30,7 +35,8 @@ class GameState {
     }
 
     startGame() {
-        this.notifyObservers('renderScreen', { screenName: 'numberPanelsScreen' })
+        this.notifyObservers('renderScreenWithAnimation', { screenName: 'mainScreen' })
+        // numberPanelsScreen
     }
 
 
@@ -40,24 +46,24 @@ class GameState {
             case 'storeNumPanels':
                 this.state.numPanels = payload.numPanels;
                 console.log(this.state);
-                this.notifyObservers('renderScreen', { screenName: 'numberCategoriesScreen' })
+                this.notifyObservers('renderScreenWithAnimation', { screenName: 'numberCategoriesScreen' })
                 break;
-            case 'storeItems':
-                this.state.items = payload.items;
-                console.log(this.state);
-                this.notifyObservers('renderScreen', { screenName: 'numberCategoriesScreen' })
-                break;
+            // case 'storeItems':
+            //     this.state.items = payload.items;
+            //     console.log(this.state);
+            //     this.notifyObservers('renderScreenWithAnimation', { screenName: 'numberCategoriesScreen' })
+            //     break;
             case 'storeNumCategories':
                 this.state.numCategories = payload.numCategories;
                 console.log(this.state);
-                this.notifyObservers('renderScreen', { screenName: 'itemsScreen' })
+                this.notifyObservers('renderScreenWithAnimation', { screenName: 'itemsScreen' })
                 break;
-            case 'storeCategoriesNames':
-                for (let i in payload.categoriesNames) {
-                    this.state.categories[i] = payload.categoriesNames[i]
-                }
-                console.log(this.state);
-                break;
+            // case 'storeCategoriesNames':
+            //     for (let i in payload.categoriesNames) {
+            //         this.state.categories[i] = payload.categoriesNames[i]
+            //     }
+            //     console.log(this.state);
+            //     break;
             case 'submitData':
                 this.state.output = createDataObject(payload.categories, payload.items);
                 console.log(this.state.output);
@@ -87,16 +93,39 @@ class GameObserver {
     }
 
     renderScreen(screen, payload) {
+        let container;
         let heading;
         let br;
-        let container;
         let horizontalPanels;
         let verticalPanels;
         let submitButton;
         switch (screen) {
+
+            case 'mainScreen':
+                container = createContainer();
+                heading = createHeading('Sorting Categories Game', 4, 'SNACKID');
+                container.append(heading)
+                const optionOne = createLinks('I want to create a new game', () => {
+                    document.body.innerHTML = '';
+                    this.gameState.notifyObservers('renderScreenWithAnimation', { screenName: 'numberPanelsScreen' })
+
+                });
+                container.append(optionOne)
+                const optionTwo = createLinks('I want to play with a sample game', () => {
+                    localStorage.setItem("gameData", JSON.stringify(sampleGameData1));
+                    window.location.href = "game.html";
+                }
+
+                );
+                container.append(optionTwo)
+
+                return container;
+
+                break;
             case 'itemsScreen':
                 // Create container div
-                container = createContainer('container1');
+                container = document.createElement('div');
+                container.id = 'screen-wide';
                 // Create h1 element
                 heading = createHeading('Step 3. Assign names and elements to each category.')
                 // Create the responsive grid
@@ -123,17 +152,9 @@ class GameObserver {
                 break;
 
             case 'numberPanelsScreen':
-                // Create container div
-                container = document.createElement('div');
-                container.id = 'container1';
-                container.classList.add('container');
+                container = createContainer();
                 // Create h1 element
-                heading = document.createElement('h1');
-                heading.textContent = 'Step 1. Choose the number of panels you want to play with.';
-
-                // Create a line break
-                br = document.createElement('br');
-
+                heading = createHeading(`Step 1. Choose the number of panels you want to play with`, 3, 'SNACKID');
                 // Create the horizontal-panels div
                 horizontalPanels = document.createElement('div');
                 horizontalPanels.classList.add('horizontal-panels');
@@ -153,7 +174,6 @@ class GameObserver {
                 });
                 // Append the heading, line break, and horizontal-panels to container
                 container.appendChild(heading);
-                container.appendChild(br);
                 container.appendChild(horizontalPanels);
 
                 // Return the container1 element
@@ -161,21 +181,13 @@ class GameObserver {
                 break;
 
             case 'numberCategoriesScreen':
-                // Create container1 div
-                container = document.createElement('div');
-                container.id = 'container1';
-                container.classList.add('container');
+
+                container = createContainer();
                 // Create h1 element
-                heading = document.createElement('h1');
-                heading.textContent = 'Step 2. Choose the number of categories.';
-
-                // Create a line break
-                br = document.createElement('br');
-
+                heading = createHeading(`Step 2. Choose the number of categories`, 3, 'SNACKID');
                 // Create the horizontal-panels div
                 horizontalPanels = document.createElement('div');
                 horizontalPanels.classList.add('horizontal-panels');
-
                 // Create the buttons dynamically (2, 3, 4) and append them to horizontal-panels
                 const numCategoriesButtons =
                     this.gameState.state.numPanels == 16 ? [2, 4, 8]
@@ -193,9 +205,7 @@ class GameObserver {
                 });
                 // Append the heading, line break, and horizontal-panels to container
                 container.appendChild(heading);
-                container.appendChild(br);
                 container.appendChild(horizontalPanels);
-
                 // Return the container element
                 return container;
                 break;
@@ -242,7 +252,7 @@ class GameObserver {
 
     async update(eventType, payload) {
         this.oldScreen = document.querySelector('.container');
-        this.mainScreen;
+        this.container;
         switch (eventType) {
             case "startGame":
                 // this.mainScreen = this.renderScreen('numberCategoriesScreen');
@@ -252,12 +262,12 @@ class GameObserver {
 
                 break;
 
-            case "renderScreen":
+            case "renderScreenWithAnimation":
                 if (this.oldScreen) await this.oldScreenFadeOut(this.oldScreen);
                 document.body.innerHTML = '';
-                this.mainScreen = this.renderScreen(payload.screenName);
-                document.body.appendChild(this.mainScreen);
-                await this.newScreenFadeIn(this.mainScreen);
+                this.container = this.renderScreen(payload.screenName);
+                document.body.appendChild(this.container);
+                await this.newScreenFadeIn(this.container);
 
         }
 
@@ -266,25 +276,6 @@ class GameObserver {
 
 
 // On Submit
-
-
-const playPreMadeGame = (number) => {
-
-    switch (number) {
-        case 'facts':
-            localStorage.setItem("gameData", JSON.stringify(this.state.output))
-            sentences = facts.sentences;
-            instructions = facts.instructions;
-            break;
-        case 'capitals':
-            sentences = europeanCapitals.sentences;
-            instructions = europeanCapitals.instructions;
-            break;
-    }
-    // const { sentences, instructions } = payload;
-    localStorage.setItem("sentences", JSON.stringify(sentences));
-    window.location.href = "game.html";
-}
 
 
 document.addEventListener("DOMContentLoaded", () => {
