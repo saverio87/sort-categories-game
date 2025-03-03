@@ -55,12 +55,14 @@ class GameController {
     startGame(gameData) {
 
         const { categories, items } = gameData;
+        // Prepping the state
         this.state.categories = categories;
         // Generate cards
         this.state.items = this.shuffle(items);
         // Render board
         this.renderBoard();
         // Start game - UI rendering
+        this.notifyObservers('updateInformationContainer', { categories: this.state.categories, categoryId: undefined });
         this.notifyObservers("startGame", this.state);
 
     }
@@ -89,6 +91,7 @@ class GameController {
     renderBoard() {
         // Render board
         this.notifyObservers('renderBoard', { items: this.state.items })
+        // Render information container with initial message
     }
 
     async handlePanelClick(panelElement, payload) {

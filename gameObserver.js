@@ -29,9 +29,6 @@ export class GameObserver {
         switch (eventType) {
             case "startGame":
 
-                // Re-render UI
-                // this.result.innerHTML = '';
-                // this.stopButton.classList.remove("hide");
 
                 break;
 
@@ -39,7 +36,13 @@ export class GameObserver {
                 this.gameContainer.classList.add("hide");
                 break;
             case "updateInformationContainer":
-
+                if (payload.categoryId == undefined) {
+                    this.informationContainer.innerText = '';
+                    this.informationContainer.innerHTML +=
+                        `<p>Find items for all ${Object.keys(payload.categories).length} categories!</p>`;
+                    // this.informationContainer.innerHTML += `<p><b>${categories[categoryId]}</b></p>`;
+                    break;
+                }
                 // re-factor this adding two cases based on mode the game is being played in,
                 // if mode is 'easy' the re-rendering of this container should tell the player
                 // the next category for which they have to find the items

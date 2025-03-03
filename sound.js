@@ -25,29 +25,6 @@ export class SoundManager {
         }
     }
 
-    // playSound(event) {
-    //     let sound;
-    //     switch (event) {
-    //         case 'correctAnswer':
-    //             sound = this.sounds.correctAnswer;
-    //             sound.play();
-    //             break;
-    //         case 'wrongAnswer':
-    //             sound = this.sounds.wrongAnswer;
-    //             sound.play();
-    //             break;
-    //         case 'click':
-    //             sound = this.sounds.click;
-    //             sound.play();
-    //             break;
-    //         case 'gameOver':
-    //             sound = this.sounds.gameOver;
-    //             sound.play();
-    //             break;
-    //         default:
-    //             console.log('No sound mapped for this event.');
-    //     }
-    // }
 }
 
 export class SoundObserver {
