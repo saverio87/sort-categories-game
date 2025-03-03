@@ -15,18 +15,23 @@ export class SoundManager {
 
     // Play the sound based on the event
     playSound(event) {
+        let sound;
         switch (event) {
             case 'correctAnswer':
-                this.sounds.correctAnswer.play();
+                sound = this.sounds.correctAnswer;
+                sound.play();
                 break;
             case 'wrongAnswer':
-                this.sounds.wrongAnswer.play();
+                sound = this.sounds.wrongAnswer;
+                sound.play();
                 break;
             case 'click':
-                this.sounds.click.play();
+                sound = this.sounds.click;
+                sound.play();
                 break;
             case 'gameOver':
-                this.sounds.gameOver.play();
+                sound = this.sounds.gameOver;
+                sound.play();
                 break;
             default:
                 console.log('No sound mapped for this event.');

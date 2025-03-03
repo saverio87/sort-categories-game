@@ -110,7 +110,6 @@ export class GameObserver {
                 await this.gameState.notifyListeners('correctAnswer');
                 await animateCategoryCompletion(payload.selectedPanels);
                 this.panelElement.parentElement.classList.remove('disable-clicks');
-
                 break;
 
             case "gameWon":

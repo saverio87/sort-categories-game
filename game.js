@@ -116,8 +116,9 @@ class GameController {
             await this.notifyObservers('selectPanel', { panelElement });
             // Check if all items in category have been found
             if (checkIfCategoryComplete(categoryId, this.state.items, this.state.selectedPanels)) {
-                // update state
+                // update state - items array
                 this.state.items = markCategoryAsCompleted(categoryId, this.state.items);
+                // re-render UI
                 await this.notifyObservers('categoryCompleted', { selectedPanels: this.state.selectedPanels });
                 this.notifyObservers('updateInformationContainer', { categories: this.state.categories, categoryId });
                 // check if game won

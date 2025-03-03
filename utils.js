@@ -73,16 +73,21 @@ function createImage(src) {
 
 export function animateCategoryCompletion(selectedPanels) {
     return new Promise((resolve) => {
+
         let completedAnimations = 0;
         selectedPanels.forEach((panel) => {
-            const img = createImage('./tick.png');
-            panel.appendChild(img);
+            const img = createImage('./tick.png'); // ✅ Create a new image for each panel
 
-            img.addEventListener("animationend", () => {
-                completedAnimations++;
-                if (completedAnimations === selectedPanels.length) {
-                    resolve(); // Resolve the promise when all animations are done
-                }
+            requestAnimationFrame(() => {
+                panel.appendChild(img); // ✅ Append AFTER the browser processes rendering
+
+                img.addEventListener("animationend", () => {
+                    completedAnimations++;
+                    img.remove(); // ✅ Ensure image is removed only after animation
+                    if (completedAnimations === selectedPanels.length) {
+                        resolve(); // ✅ Resolve when all animations are done
+                    }
+                });
             });
         });
     });
