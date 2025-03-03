@@ -14,29 +14,40 @@ export class SoundManager {
     }
 
     // Play the sound based on the event
+
     playSound(event) {
-        let sound;
-        switch (event) {
-            case 'correctAnswer':
-                sound = this.sounds.correctAnswer;
-                sound.play();
-                break;
-            case 'wrongAnswer':
-                sound = this.sounds.wrongAnswer;
-                sound.play();
-                break;
-            case 'click':
-                sound = this.sounds.click;
-                sound.play();
-                break;
-            case 'gameOver':
-                sound = this.sounds.gameOver;
-                sound.play();
-                break;
-            default:
-                console.log('No sound mapped for this event.');
+        if (this.sounds[event]) {
+            const soundClone = this.sounds[event].cloneNode(); // ✅ Create a new instance
+            soundClone.volume = this.sounds[event].volume; // ✅ Maintain the set volume
+            soundClone.play(); // ✅ Ensure the sound plays
+        } else {
+            console.log(`No sound mapped for event: ${event}`);
         }
     }
+
+    // playSound(event) {
+    //     let sound;
+    //     switch (event) {
+    //         case 'correctAnswer':
+    //             sound = this.sounds.correctAnswer;
+    //             sound.play();
+    //             break;
+    //         case 'wrongAnswer':
+    //             sound = this.sounds.wrongAnswer;
+    //             sound.play();
+    //             break;
+    //         case 'click':
+    //             sound = this.sounds.click;
+    //             sound.play();
+    //             break;
+    //         case 'gameOver':
+    //             sound = this.sounds.gameOver;
+    //             sound.play();
+    //             break;
+    //         default:
+    //             console.log('No sound mapped for this event.');
+    //     }
+    // }
 }
 
 export class SoundObserver {
